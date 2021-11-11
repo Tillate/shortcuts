@@ -10,13 +10,13 @@ class HomeScreen extends Component {
                 <View style={styles.containerButton}>
                     {/* Ajout du Bouton Catégorie */}
                     <TouchableOpacity style={styles.buttons}
-                    onPress = {() => this.props.navigation.navigate("Category")}
+                    onPress = {() => this.props.navigation.navigate("Categorie")}
                     >
                         <Text style={styles.buttonsText}>Catégorie</Text>
                     </TouchableOpacity>
                     {/* Ajout du Bouton Logiciel */}
                     <TouchableOpacity style={styles.buttons}
-                    onPress = {() => this.props.navigation.navigate("Software")}
+                    onPress = {() => this.props.navigation.navigate("Logiciel")}
                     >
                         <Text style={styles.buttonsText}>Logiciel</Text>
                     </TouchableOpacity>
@@ -25,7 +25,7 @@ class HomeScreen extends Component {
                 <Text style={styles.mainText}>Ou bien : </Text>
                 {/* Ajout du Bouton Ajouter un raccourci */}
                 <TouchableOpacity style={[styles.buttons, styles.shortcutButton]}
-                onPress = {() => this.props.navigation.navigate("Shortcuts")}
+                onPress = {() => this.props.navigation.navigate("Raccourci")}
                 >
                     <Text style={[styles.buttonsText, styles.shortcutText]}>Ajouter un raccourci</Text>
                 </TouchableOpacity>

@@ -4,7 +4,9 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 class CategoryScreen extends Component {
     render() {
         return (
+
             <View style={styles.container}>
+                
                 <Text style={styles.mainText}>Rechercher par catégorie: </Text>
 
 
@@ -13,18 +15,18 @@ class CategoryScreen extends Component {
 
                     {/* Ajout du Bouton PHP Storm */}
                     <TouchableOpacity style={styles.buttons}
-                    onPress = {() => this.props.navigation.navigate("Category")}
+                    onPress = {() => this.props.navigation.navigate("Categorie")}
                     >
                         <Text style={styles.buttonsText}>PHPStorm</Text>
                     </TouchableOpacity>
                     <View style={styles.containerButtons}>
                         <TouchableOpacity style={[styles.buttons, styles.buttonsDev]}
-                        onPress = {() => this.props.navigation.navigate("Category")}
+                        onPress = {() => this.props.navigation.navigate("Categorie")}
                         >
                             <Text style={styles.buttonsText}>Développement</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles.buttons, styles.buttonsPhp, styles.buttonsDev]}
-                        onPress = {() => this.props.navigation.navigate("Category")}
+                        onPress = {() => this.props.navigation.navigate("Categorie")}
                         >
                             <Text style={styles.buttonsText}>PHP</Text>
                         </TouchableOpacity>
@@ -34,12 +36,12 @@ class CategoryScreen extends Component {
                 <View style={styles.containerVscode}>
                     <Text style={styles.cardText}>Dupliquer une ligne dans VSCode </Text>
                     <TouchableOpacity style={styles.buttons}
-                    onPress = {() => this.props.navigation.navigate("Category")}
+                    onPress = {() => this.props.navigation.navigate("Categorie")}
                     >
                         <Text style={styles.buttonsText}>VSCode</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.buttons, styles.buttonsDev]}
-                    onPress = {() => this.props.navigation.navigate("Category")}
+                    onPress = {() => this.props.navigation.navigate("Categorie")}
                     >
                         <Text style={styles.buttonsText}>Développement</Text>
                     </TouchableOpacity>
