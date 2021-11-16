@@ -1,107 +1,77 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from "react";
+import { ScrollView, StyleSheet, View, Text } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
-class SoftwareScreen extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.mainText}>Rechercher par logiciel : </Text>
+export default function SoftwareScreen(props) {
+  const { software } = props.route.params;
 
+  const softwareJsx = software
+    .sort((c1, c2) => c1.name.localeCompare(c2.name))
+    .map((s) => <Picker.Item key={s.id} label={s.name} value={s.id} />);
 
-                <View style={styles.containerPhp}>
-                    <Text style={styles.cardText}>Indentation du code dans PHPStorm </Text>
+  const [logiciel, setSoftware] = useState([]);
+  const [shortcut, setShortcut] = useState([]);
+  console.log(software);
 
-                    {/* Ajout du Bouton PHP Storm */}
-                    <TouchableOpacity style={styles.buttons}
-                    onPress = {() => this.props.navigation.navigate("Logiciel")}
-                    >
-                        <Text style={styles.buttonsText}>PHPStorm</Text>
-                    </TouchableOpacity>
-                    <View style={styles.containerButtons}>
-                        <TouchableOpacity style={[styles.buttons, styles.buttonsDev]}
-                        onPress = {() => this.props.navigation.navigate("Logiciel")}
-                        >
-                            <Text style={styles.buttonsText}>Développement</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.buttons, styles.buttonsPhp, styles.buttonsDev]}
-                        onPress = {() => this.props.navigation.navigate("Logiciel")}
-                        >
-                            <Text style={styles.buttonsText}>PHP</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+  const shortcutJsx = shortcut.map((s) => (
+    <View key={s.id}>
+      <Text>{s.title}</Text>
+      <Text>{s.software.name}</Text>
+      <View>
+        {s.categories.map((c) => (
+          <Text key={c.id}>{c.name}</Text>
+        ))}
+      </View>
+    </View>
+  ));
 
-                <View style={styles.containerPhpstorm}>
-                    <Text style={styles.cardText}>Rechercher dans un projet PHP Storm </Text>
-                    <TouchableOpacity style={styles.buttons}
-                    onPress = {() => this.props.navigation.navigate("Logiciel")}
-                    >
-                        <Text style={styles.buttonsText}>PHPStorm</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.buttons, styles.buttonsDev]}
-                    onPress = {() => this.props.navigation.navigate("Logiciel")}
-                    >
-                        <Text style={styles.buttonsText}>Développement</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        );
-    }
+  return (
+    <View style={styles.menu}>
+      <ScrollView>
+        <Picker
+          selectedValue={logiciel}
+          onValueChange={function (itemValue, itemIndex) {
+            fetch(process.env.API_URL + "shortcuts?categories.id=" + itemValue)
+              .then((response) => response.json())
+              .then((data) => setShortcut(data["hydra:member"]))
+              .catch((error) => console.log(error));
+            setSoftware(itemValue);
+          }}
+          mode="dropdown"
+          style={styles.picker}
+        >
+          <Picker.Item label="Choisir un logiciel" value="Ici l'affichage des raccourcis" />
+          {softwareJsx}
+        </Picker>
+        <View style={styles.catContainer}>
+            {shortcutJsx} 
+        </View>
+      </ScrollView>
+    </View>
+  );
 }
 
-export default SoftwareScreen;
-
-const styles = StyleSheet.create ({
-    container: {
-        alignItems: 'center',
-    },
-    containerPhp: {
-        marginVertical:30,
-        width: 270,
-    },
-    containerButtons: {
-        display:'flex',
-        flexDirection:'row',
-    },
-    containerPhpstorm: {
-        marginVertical:30,
-        width: 270,
-    },
-    buttons: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'center',
-        alignItems:'center',
-        width: 140,
-        height: 40,
-        backgroundColor:'#186BC9',
-        marginVertical : 10,
-        borderRadius:30,
-    },
-    mainText: {
-        textAlign: 'center',
-        fontSize: 22,
-        fontWeight: 'bold',
-        color: '#114A8A',
-        marginTop: 20,
-    },
-    cardText: {
-        textAlign:'center',
-        marginVertical:10,
-        fontSize: 18,
-        fontWeight: '500',
-        color: '#114A8A',
-    },
-    buttonsText: {
-        fontSize:16,
-        fontWeight: '500',
-        color: 'white',
-    },
-    buttonsPhp: {
-        width : 80,
-        marginLeft: 15,
-    },
-    buttonsDev: {
-        backgroundColor:'#6AAFFD',
-    },   
-})
+const styles = StyleSheet.create({
+  menu: {
+    height: "100%",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  picker: {
+    fontSize: 16,
+    marginVertical: 30,
+    width: 300,
+    padding: 15,
+    borderWidth: 2,
+    borderColor: "#114A8A",
+  },
+  catContainer: {
+    backgroundColor: 'white',
+    width: 300,
+    paddingHorizontal:10,
+    paddingVertical: 10,
+    borderWidth: 2,
+    borderColor: "#114A8A",
+    borderRadius: 5,
+  }
+});
