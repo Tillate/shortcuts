@@ -14,12 +14,12 @@ export default function CategoryScreen(props) {
   console.log(categories);
 
   const shortcutJsx = shortcut.map((s) => (
-    <View key={s.id}>
-      <Text>{s.title}</Text>
-      <Text>{s.software.name}</Text>
-      <View>
+    <View key={s.id} style={styles.catContainer}>
+      <Text style={styles.pickerTitle}>{s.title}</Text>
+      <Text style={styles.pickerCat}>{s.software.name}</Text>
+      <View style={styles.logContainer}>
         {s.categories.map((c) => (
-          <Text key={c.id}>{c.name}</Text>
+          <Text style={styles.pickerLog} key={c.id}>{c.name}</Text>
         ))}
       </View>
     </View>
@@ -43,7 +43,7 @@ export default function CategoryScreen(props) {
           <Picker.Item label="Choisir une catégorie" value="Ici l'affichage des raccourcis" />
           {categoriesJsx}
         </Picker>
-        <View style={styles.catContainer}>
+        <View>
           {shortcutJsx}
         </View>
       </ScrollView>
@@ -60,18 +60,49 @@ const styles = StyleSheet.create({
   picker: {
     fontSize: 16,
     marginVertical: 30,
-    width: 300,
+    width: 400,
     padding: 15,
     borderWidth: 2,
     borderColor: "#114A8A",
   },
   catContainer: {
     backgroundColor: 'white',
-    width: 300,
+    width: 400,
     paddingHorizontal:10,
     paddingVertical: 10,
     borderWidth: 2,
     borderColor: "#114A8A",
     borderRadius: 5,
-  }
+  },
+  logContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  pickerCat: {
+    backgroundColor: 'lightblue',
+    width: 180,
+    borderRadius: 5,
+    marginHorizontal: 5,
+    padding: 5,
+    fontSize: 16,
+    fontWeight:500,
+    textAlign: 'center',
+  },
+  pickerLog: {
+    backgroundColor: 'lightyellow',
+    width: 180,
+    borderRadius: 5,
+    padding: 5,
+    marginVertical: 10,
+    marginHorizontal: 5,
+    fontSize: 16,
+    fontWeight:500,
+    textAlign: 'center',
+  },
+  pickerTitle: {
+    textAlign: 'center',
+    marginBottom: 20,
+    fontWeight: 600,
+    fontSize:18,
+  },
 });
