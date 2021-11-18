@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, View, Text } from "react-native";
+import { ScrollView, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
 export default function CategoryScreen(props) {
@@ -14,15 +14,19 @@ export default function CategoryScreen(props) {
   console.log(categories);
 
   const shortcutJsx = shortcut.map((s) => (
-    <View key={s.id} style={styles.catContainer}>
-      <Text style={styles.pickerTitle}>{s.title}</Text>
-      <Text style={styles.pickerCat}>{s.software.name}</Text>
-      <View style={styles.logContainer}>
-        {s.categories.map((c) => (
-          <Text style={styles.pickerLog} key={c.id}>{c.name}</Text>
-        ))}
+    <TouchableOpacity
+    onPress={() => props.navigation.navigate("Detail :", { shortcut: s })}
+    > 
+      <View key={s.id} style={styles.catContainer}>
+        <Text style={styles.pickerTitle}>{s.title}</Text>
+        <Text style={styles.pickerCat}>{s.software.name}</Text>
+        <View style={styles.logContainer}>
+          {s.categories.map((c) => (
+            <Text style={styles.pickerLog} key={c.id}>{c.name}</Text>
+          ))}
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   ));
 
   return (
@@ -79,7 +83,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   pickerCat: {
-    backgroundColor: 'lightblue',
+    backgroundColor: '#186BC9',
+    color: 'white',
     width: 180,
     borderRadius: 5,
     marginHorizontal: 5,
@@ -89,7 +94,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   pickerLog: {
-    backgroundColor: 'lightyellow',
+    backgroundColor: '#6AAFFD',
+    color: 'white',
     width: 180,
     borderRadius: 5,
     padding: 5,

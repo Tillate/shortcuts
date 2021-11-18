@@ -5,6 +5,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import CategoryScreen from "./src/screens/CategoryScreen";
 import SoftwareScreen from "./src/screens/SoftwareScreen";
 import AjoutShortcutScreen from "./src/screens/ShortcutsScreen";
+import DetailsScreen from "./src/screens/DetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ export default function App() {
         <Stack.Screen name="Rechercher par catégorie :" component={CategoryScreen} options={styleNav} />
         <Stack.Screen name="Rechercher par logiciel :" component={SoftwareScreen} options={styleNav} />
         <Stack.Screen name="Ajouter un raccourci :" component={AjoutShortcutScreen} options={styleNav} />
+        <Stack.Screen name="Detail :" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
