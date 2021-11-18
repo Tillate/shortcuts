@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   shortcutText: {
-    color: "#DBE0DE",
+    color: "white",
     fontSize: 22,
     backgroundColor: "#114A8A",
   },

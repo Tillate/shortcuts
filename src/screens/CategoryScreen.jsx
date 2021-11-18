@@ -5,9 +5,9 @@ import { Picker } from "@react-native-picker/picker";
 export default function CategoryScreen(props) {
   const { categories } = props.route.params;
 
-  const categoriesJsx = categories
-    .sort((c1, c2) => c1.name.localeCompare(c2.name))
-    .map((s) => <Picker.Item key={s.id} label={s.name} value={s.id} />);
+  const categoriesJsx = categories                  //Renvoi les noms des catégories dans un Picker Item
+    .sort((c1, c2) => c1.name.localeCompare(c2.name)) //Trie des noms des catégorie
+    .map((s) => <Picker.Item key={s.id} label={s.name} value={s.id} />); //
 
   const [category, setCategory] = useState([]);
   const [shortcut, setShortcut] = useState([]);
@@ -17,12 +17,12 @@ export default function CategoryScreen(props) {
     <TouchableOpacity
     onPress={() => props.navigation.navigate("Detail :", { shortcut: s })}
     > 
-      <View key={s.id} style={styles.catContainer}>
-        <Text style={styles.pickerTitle}>{s.title}</Text>
-        <Text style={styles.pickerCat}>{s.software.name}</Text>
-        <View style={styles.logContainer}>
+      <View key={s.id} style={styles.resultContainer}>
+        <Text style={styles.resultTitle}>{s.title}</Text>
+        <Text style={styles.resultSoft}>{s.software.name}</Text>
+        <View style={styles.catContainer}>
           {s.categories.map((c) => (
-            <Text style={styles.pickerLog} key={c.id}>{c.name}</Text>
+            <Text style={styles.resultCat} key={c.id}>{c.name}</Text>
           ))}
         </View>
       </View>
@@ -44,7 +44,7 @@ export default function CategoryScreen(props) {
           mode="dropdown"
           style={styles.picker}
         >
-          <Picker.Item label="Choisir une catégorie" value="Ici l'affichage des raccourcis" />
+          <Picker.Item label="Choisir une catégorie" value="Affichage des catégories" />
           {categoriesJsx}
         </Picker>
         <View>
@@ -57,7 +57,6 @@ export default function CategoryScreen(props) {
 
 const styles = StyleSheet.create({
   menu: {
-    height: "100%",
     alignItems: "center",
     marginTop: 20,
   },
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#114A8A",
   },
-  catContainer: {
+  resultContainer: {
     backgroundColor: 'white',
     width: 400,
     paddingHorizontal:10,
@@ -78,14 +77,13 @@ const styles = StyleSheet.create({
     borderColor: "#114A8A",
     borderRadius: 5,
   },
-  logContainer: {
+  catContainer: {
     display: 'flex',
     flexDirection: 'row',
   },
-  pickerCat: {
+  resultSoft: {
     backgroundColor: '#186BC9',
     color: 'white',
-    width: 180,
     borderRadius: 5,
     marginHorizontal: 5,
     padding: 5,
@@ -93,19 +91,18 @@ const styles = StyleSheet.create({
     fontWeight:500,
     textAlign: 'center',
   },
-  pickerLog: {
+  resultCat: {
     backgroundColor: '#6AAFFD',
     color: 'white',
-    width: 180,
     borderRadius: 5,
-    padding: 5,
+    padding: 10,
     marginVertical: 10,
     marginHorizontal: 5,
     fontSize: 16,
     fontWeight:500,
     textAlign: 'center',
   },
-  pickerTitle: {
+  resultTitle: {
     textAlign: 'center',
     marginBottom: 20,
     fontWeight: 600,

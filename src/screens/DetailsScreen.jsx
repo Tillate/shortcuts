@@ -7,26 +7,34 @@ export default function DetailsScreen(props) {
   console.log(props.route.params);
   
   const shortcutJsx = shortcut.categories.map((s) => (
-  <Text key={s.id}>{s.name}</Text>));
+  <Text style={styles.textShort} key={s.id}>{s.name}</Text>));
 
 
     return (
         <View style={styles.menu}>
             <Text style={styles.pickerTitle}>{shortcut.title}</Text>
-            <TouchableOpacity style={styles.buttonsShort}> {shortcutJsx} </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonsSoft}> {shortcut.software.name} </TouchableOpacity>
-            <Text style={styles.h2}>Windows
+            <Text style={styles.buttonsSoft}> {shortcut.software.name} </Text>
+            <View style={styles.buttonsShort}> {shortcutJsx} </View>
+            
+            <View style={styles.osContainer}>
+                <Text style={styles.osTitle}>Windows</Text>
                 <Text style={styles.p}>{shortcut.windows}</Text>
-            </Text>
-            <Text style={styles.h2}>Mac 
+            </View>
+            
+            <View style={styles.osContainer}>
+                <Text style={styles.osTitle}>Mac </Text>
                 <Text style={styles.p}>{shortcut.macos}</Text>
-            </Text>
-            <Text style={styles.h2}>Linux
-            <Text>{shortcut.linux}</Text>
-            </Text>
+            </View>
+
+            <View style={styles.osContainer}>
+                <Text style={styles.osTitle}>Linux</Text>
+                <Text style={styles.p}>{shortcut.linux}</Text>
+            </View>
+
             <Text style={styles.h2}>Contexte :</Text>
             <Text style={styles.p}>{shortcut.context}</Text>
-            <Text>Description :</Text>
+
+            <Text style={styles.h2}>Description :</Text>
             <Text style={styles.p}>{shortcut.description}</Text>
         </View>
     )
@@ -35,46 +43,66 @@ export default function DetailsScreen(props) {
 
 const styles = StyleSheet.create({
     menu: {
-        height: "100%",
-        alignItems: "center",
+        //alignItems: "center",
         marginTop: 20,
       },
-    h2: {
-        fontSize: 16,
-        fontWeight: 500,
-    },
-    p:{
-        fontWeight:400,
-        marginLeft:15,
-    },
-    buttonsShort: {
-        backgroundColor: '#186BC9',
-        color: 'white',
-        width: 180,
-        borderRadius: 5,
-        marginHorizontal: 5,
-        padding: 5,
-        fontSize: 16,
-        fontWeight:500,
-        textAlign: 'center',
-      },
-      buttonsSoft: {
-        backgroundColor: '#6AAFFD',
-        color: 'white',
-        width: 180,
-        borderRadius: 5,
-        padding: 5,
-        marginVertical: 10,
-        marginHorizontal: 5,
-        fontSize: 16,
-        fontWeight:500,
-        textAlign: 'center',
-      },
-      pickerTitle: {
+    pickerTitle: {
         textAlign: 'center',
         marginBottom: 20,
         fontWeight: 600,
         fontSize:18,
       },
+    buttonsShort: {
+        display: 'flex',
+        flexDirection: 'row',
+        margin: 10,
+      },
+    buttonsSoft: {
+        color: 'white',
+        backgroundColor: '#186BC9',
+        borderRadius: 5,
+        padding: 10,
+        marginVertical: 10,
+        marginHorizontal: 15,
+        fontSize: 16,
+        fontWeight:'bold',
+        textAlign: 'center',
+      },
+    textShort: {
+        borderRadius: 5,
+        backgroundColor: '#6AAFFD',
+        padding: 10,
+        fontSize: 16,
+        fontWeight:500,
+        textAlign: 'center',
+        color: 'white',
+        margin: 5,
+    },
+    osContainer:{
+        display: 'flex',
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent: 'center',
+      },
+    osTitle: {
+        width:'50%',
+        fontSize: 16,
+        fontWeight: 500,
+        marginVertical:15,
+        textAlign: 'right',
+    },
+    h2: {
+        fontSize: 16,
+        fontWeight: 600,
+        marginTop:15,
+        marginLeft:15,
+    },
+    p:{
+        width:'50%',
+        fontWeight:400,
+        marginLeft:15,
+        marginVertical:15,
+        width: 300,
+    },
   });
   

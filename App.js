@@ -27,7 +27,7 @@ export default function App() {
         <Stack.Screen name="Rechercher par catégorie :" component={CategoryScreen} options={styleNav} />
         <Stack.Screen name="Rechercher par logiciel :" component={SoftwareScreen} options={styleNav} />
         <Stack.Screen name="Ajouter un raccourci :" component={AjoutShortcutScreen} options={styleNav} />
-        <Stack.Screen name="Detail :" component={DetailsScreen} />
+        <Stack.Screen name="Detail :" component={DetailsScreen} options={styleNav} />
       </Stack.Navigator>
     </NavigationContainer>
   );
