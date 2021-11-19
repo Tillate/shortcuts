@@ -7,14 +7,16 @@ export default function DetailsScreen(props) {
   console.log(props.route.params);
   
   const shortcutJsx = shortcut.categories.map((s) => (
-  <Text style={styles.textShort} key={s.id}>{s.name}</Text>));
-
+    <View style={styles.contShort}>
+      <Text style={styles.textShort} key={s.id}>{s.name}</Text>
+    </View>
+    ));
 
     return (
         <View style={styles.menu}>
             <Text style={styles.pickerTitle}>{shortcut.title}</Text>
             <Text style={styles.buttonsSoft}> {shortcut.software.name} </Text>
-            <View style={styles.buttonsShort}> {shortcutJsx} </View>
+            <Text style={styles.buttonsShort}> {shortcutJsx} </Text>
             
             <View style={styles.osContainer}>
                 <Text style={styles.osTitle}>Windows</Text>
@@ -22,7 +24,7 @@ export default function DetailsScreen(props) {
             </View>
             
             <View style={styles.osContainer}>
-                <Text style={styles.osTitle}>Mac </Text>
+                <Text style={styles.osTitle}>Mac</Text>
                 <Text style={styles.p}>{shortcut.macos}</Text>
             </View>
 
@@ -43,20 +45,29 @@ export default function DetailsScreen(props) {
 
 const styles = StyleSheet.create({
     menu: {
-        //alignItems: "center",
         marginTop: 20,
       },
     pickerTitle: {
         textAlign: 'center',
         marginBottom: 20,
-        fontWeight: 600,
+        fontWeight: "600",
         fontSize:18,
       },
     buttonsShort: {
         display: 'flex',
         flexDirection: 'row',
-        margin: 10,
       },
+      textShort: {
+        borderRadius: 5,
+        backgroundColor: '#6AAFFD',
+        padding: 10,
+        fontSize: 16,
+        fontWeight:"500",
+        textAlign: 'center',
+        color: 'white',
+        marginVertical: 10,
+        marginLeft: 15,
+    },
     buttonsSoft: {
         color: 'white',
         backgroundColor: '#186BC9',
@@ -65,19 +76,9 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         marginHorizontal: 15,
         fontSize: 16,
-        fontWeight:'bold',
+        fontWeight:"bold",
         textAlign: 'center',
       },
-    textShort: {
-        borderRadius: 5,
-        backgroundColor: '#6AAFFD',
-        padding: 10,
-        fontSize: 16,
-        fontWeight:500,
-        textAlign: 'center',
-        color: 'white',
-        margin: 5,
-    },
     osContainer:{
         display: 'flex',
         flexDirection:'row',
@@ -87,19 +88,19 @@ const styles = StyleSheet.create({
     osTitle: {
         width:'50%',
         fontSize: 16,
-        fontWeight: 500,
+        fontWeight: "500",
         marginVertical:15,
         textAlign: 'right',
     },
     h2: {
         fontSize: 16,
-        fontWeight: 600,
+        fontWeight: "600",
         marginTop:15,
         marginLeft:15,
     },
     p:{
         width:'50%',
-        fontWeight:400,
+        fontWeight:"400",
         marginLeft:15,
         marginVertical:15,
         width: 300,

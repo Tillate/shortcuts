@@ -3,20 +3,21 @@ import { ScrollView, StyleSheet, View, Text, TouchableOpacity } from "react-nati
 import { Picker } from "@react-native-picker/picker";
 
 export default function SoftwareScreen(props) {
-  const { software } = props.route.params;  //Route pour aller des props à software
+  const { software } = props.route.params;
 
-  const softwareJsx = software      //Renvoi les noms des logiciels dans un Picker Item
-    .sort((c1, c2) => c1.name.localeCompare(c2.name))  //Trie des noms des logiciels 
+  const softwareJsx = software
+    .sort((c1, c2) => c1.name.localeCompare(c2.name))  
     .map((s) => <Picker.Item key={s.id} label={s.name} value={s.id} />); 
 
-  const [logiciel, setSoftware] = useState([]);  //Hook pour éviter d'écrire une classe
+  const [softwares, setSoftwares] = useState([]);
   const [shortcut, setShortcut] = useState([]);
 
   const shortcutJsx = shortcut.map((s) => (
     <TouchableOpacity
     onPress={() => props.navigation.navigate("Detail :", { shortcut: s })}
+    style={styles.resultContainer}
     > 
-      <View key={s.id} style={styles.resultContainer}>
+      <View key={s.id}>
         <Text style={styles.resultTitle}>{s.title}</Text>
         <Text style={styles.resultSoft}>{s.software.name}</Text>
         <View style={styles.catContainer}>
@@ -29,56 +30,61 @@ export default function SoftwareScreen(props) {
   ));
 
   return (
-    <View style={styles.menu}>
-      <ScrollView>
-        <Picker
-          selectedValue={logiciel}
-          onValueChange={function (itemValue, itemIndex) {
-            fetch(process.env.API_URL + "shortcuts?categories.id=" + itemValue)
-              .then((response) => response.json())
-              .then((data) => setShortcut(data["hydra:member"]))
-              .catch((error) => console.log(error));
-            setSoftware(itemValue);
-          }}
-          mode="dropdown"
-          style={styles.picker}
-        >
-          <Picker.Item label="Choisir un logiciel" value="Ici l'affichage des raccourcis" />
-          {softwareJsx}
-        </Picker>
-        <View>
-            {shortcutJsx} 
-        </View>
-      </ScrollView>
-    </View>
+    <ScrollView>
+      <View style={styles.menu}>
+          <Picker
+            selectedValue={softwares}
+            onValueChange={function (itemValue, itemIndex) {
+              fetch(process.env.API_URL + "shortcuts?categories.id=" + itemValue)
+                .then((response) => response.json())
+                .then((data) => setShortcut(data["hydra:member"]))
+                .catch((error) => console.log(error));
+              setSoftwares(itemValue);
+            }}
+            mode="dropdown"
+            style={styles.picker}
+          >
+            <Picker.Item label="Choisir un logiciel" value="Ici l'affichage des raccourcis" />
+            {softwareJsx}
+          </Picker>
+          {shortcutJsx}    
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   menu: {
-    alignItems: "center",
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
     marginTop: 20,
+    justifyContent:'center'
+
   },
   picker: {
     fontSize: 16,
-    marginVertical: 30,
-    width: 400,
-    padding: 15,
+    width: '90%',
+    paddingHorizontal: 15,
     borderWidth: 2,
     borderColor: "#114A8A",
+    marginBottom:10,
+    borderRadius:5,
   },
   resultContainer: {
     backgroundColor: 'white',
-    width: 400,
+    width: '90%',
     paddingHorizontal:10,
     paddingVertical: 10,
     borderWidth: 2,
     borderColor: "#114A8A",
-    borderRadius: 5,
+    borderRadius: 10,
+    marginBottom:5,
   },
   catContainer: {
     display: 'flex',
     flexDirection: 'row',
+    flexWrap:'wrap',
   },
   resultSoft: {
     backgroundColor: '#186BC9',
@@ -87,7 +93,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     padding: 5,
     fontSize: 16,
-    fontWeight:500,
+    fontWeight:"500",
     textAlign: 'center',
   },
   resultCat: {
@@ -95,16 +101,16 @@ const styles = StyleSheet.create({
     color: 'white',
     borderRadius: 5,
     padding: 10,
-    marginVertical: 10,
+    marginTop: 10,
     marginHorizontal: 5,
     fontSize: 16,
-    fontWeight:500,
+    fontWeight:"500",
     textAlign: 'center',
   },
   resultTitle: {
     textAlign: 'center',
     marginBottom: 20,
-    fontWeight: 600,
+    fontWeight: "600",
     fontSize:18,
   },
 });
