@@ -12,8 +12,9 @@ export default function SoftwareScreen(props) {
   const [softwares, setSoftwares] = useState([]);
   const [shortcut, setShortcut] = useState([]);
 
-  const shortcutJsx = shortcut.map((s) => (
+  const shortcutJsx = shortcut.map((s, key) => (
     <TouchableOpacity
+    key={key}
     onPress={() => props.navigation.navigate("Detail :", { shortcut: s })}
     style={styles.resultContainer}
     > 

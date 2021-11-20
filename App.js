@@ -9,7 +9,7 @@ import DetailsScreen from "./src/screens/DetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
-const styleNav = {
+const headerNav = {
   headerStyle: {
     backgroundColor: "#114A8A",
   },
@@ -23,11 +23,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Accueil" component={HomeScreen} options={styleNav} />
-        <Stack.Screen name="Rechercher par catégorie :" component={CategoryScreen} options={styleNav} />
-        <Stack.Screen name="Rechercher par logiciel :" component={SoftwareScreen} options={styleNav} />
-        <Stack.Screen name="Ajouter un raccourci :" component={AjoutShortcutScreen} options={styleNav} />
-        <Stack.Screen name="Detail :" component={DetailsScreen} options={styleNav} />
+        <Stack.Screen name="Accueil" component={HomeScreen} options={headerNav} />
+        <Stack.Screen name="Rechercher par catégorie :" component={CategoryScreen} options={headerNav} />
+        <Stack.Screen name="Rechercher par logiciel :" component={SoftwareScreen} options={headerNav} />
+        <Stack.Screen name="Ajouter un raccourci :" component={AjoutShortcutScreen} options={headerNav} />
+        <Stack.Screen name="Detail :" component={DetailsScreen} options={headerNav} />
       </Stack.Navigator>
     </NavigationContainer>
   );

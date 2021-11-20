@@ -38,7 +38,6 @@ export default function ShortcutsScreen(props) {
     console.log(software);
 
 
-
     return (
       <ScrollView>
         <View style={styles.menu}>
@@ -160,11 +159,11 @@ const styles = StyleSheet.create({
         padding:10,
     },
     containerSoftware:{
+        height:50,
         display:'flex',
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
-        height:50,
         marginVertical: 5,
         borderWidth:1,
         borderColor:'#d8d8d8',

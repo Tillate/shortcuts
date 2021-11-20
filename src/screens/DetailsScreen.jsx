@@ -6,8 +6,8 @@ export default function DetailsScreen(props) {
   const { shortcut } = props.route.params;
   console.log(props.route.params);
   
-  const shortcutJsx = shortcut.categories.map((s) => (
-    <View style={styles.contShort}>
+  const shortcutJsx = shortcut.categories.map((s, key) => (
+    <View key={key} style={styles.contShort}>
       <Text style={styles.textShort} key={s.id}>{s.name}</Text>
     </View>
     ));
