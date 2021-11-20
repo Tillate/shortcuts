@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
+import { TouchableOpacity, StyleSheet, Text, View, Image } from "react-native";
 
 export default function HomeScreen(props) {
   const [categories, setCategories] = useState([]);
@@ -25,6 +25,10 @@ export default function HomeScreen(props) {
   }, []);
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.logo}
+        source={require('../../assets/logo.png')}
+      />
       <Text style={styles.mainText}>Rechercher par :</Text>
       <View style={styles.containerButton}>
         <TouchableOpacity
@@ -60,8 +64,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#DBE0DE",
   },
+  logo:{
+    height:80,
+    borderRadius:40,
+  },
   mainText: {
-    fontSize: 26,
+    fontSize: 22,
     fontWeight: "bold",
     color: "#114A8A",
   },

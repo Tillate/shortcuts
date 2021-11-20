@@ -60,17 +60,17 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     alignItems:'center',
     marginTop: 20,
-    justifyContent:'center'
+    justifyContent:'center',
   },
-  
   picker: {
     fontSize: 16,
     width: '90%',
-    paddingHorizontal: 15,
-    borderWidth: 2,
+    padding: 10,
+    // borderWidth: 2,
     borderColor: "#114A8A",
     marginBottom:20,
     borderRadius:5,
+
   },
   resultContainer: {
     backgroundColor: 'white',
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderWidth: 2,
     borderColor: "#114A8A",
-    borderRadius: 10,
+    borderRadius: 5,
     marginBottom:10,
   },
   catContainer: {
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   resultSoft: {
     backgroundColor: '#186BC9',
     color: 'white',
-    borderRadius: 15,
+    borderRadius: 5,
     marginHorizontal: 5,
     padding: 5,
     fontSize: 16,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   resultCat: {
     backgroundColor: '#6AAFFD',
     color: 'white',
-    borderRadius: 15,
+    borderRadius: 5,
     padding: 10,
     marginTop: 10,
     marginHorizontal: 5,

@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
   picker: {
     fontSize: 16,
     width: '90%',
-    paddingHorizontal: 15,
-    borderWidth: 2,
+    padding: 10,
+    // borderWidth: 2,
     borderColor: "#114A8A",
     marginBottom:10,
     borderRadius:5,
