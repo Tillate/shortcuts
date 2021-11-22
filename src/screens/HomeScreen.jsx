@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet, Text, View, Image } from "react-native";
 
 export default function HomeScreen(props) {
+  // HOOK
   const [categories, setCategories] = useState([]);
   const [software, setSoftwares] = useState([]);
   const [shortcuts, setShortcuts] = useState([]);
+
   useEffect(() => {
     console.log("fetch: " + process.env.API_URL + "categories");
     fetch(process.env.API_URL + "categories")
@@ -23,6 +25,7 @@ export default function HomeScreen(props) {
       .then((data) => setShortcuts(data["hydra:member"]))
       .catch((error) => console.log(error));
   }, []);
+
   return (
     <View style={styles.container}>
       <Image
@@ -33,12 +36,14 @@ export default function HomeScreen(props) {
       <View style={styles.containerButton}>
         <TouchableOpacity
           style={styles.buttons}
+          // Passage du paramètre dans la route qui sera recup dans CategoryScreen
           onPress={() => props.navigation.navigate("Rechercher par catégorie :", { categories: categories })}
         >
           <Text style={styles.buttonText}>Catégorie</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.buttons}
+          // Passage du paramètre dans la route qui sera recup dans SoftwareScreen
           onPress={() => props.navigation.navigate("Rechercher par logiciel :", { software: software })}
         >
           <Text style={styles.buttonText}>Logiciel</Text>
@@ -65,8 +70,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#DBE0DE",
   },
   logo:{
-    height:80,
-    borderRadius:40,
+    height:68,
+    width:320,
   },
   mainText: {
     fontSize: 22,
@@ -91,8 +96,8 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#114A8A",
     borderWidth: 2,
-    width: 160,
-    height: 75,
+    width: 140,
+    height: 70,
     borderRadius: 50,
     marginHorizontal: 15,
   },
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#114A8A",
     width: 300,
-    height: 100,
+    height: 80,
     borderRadius: 50,
   },
   shortcutText: {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, View, Text,  TextInput, Button } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import * as ImagePicker from 'expo-image-picker';
 
 export default function ShortcutsScreen(props) {
     const { shortcuts } = props.route.params;
@@ -21,7 +22,7 @@ export default function ShortcutsScreen(props) {
     
     const categoriesJsx = category                 
     .sort((c1, c2) => c1.name.localeCompare(c2.name)) 
-    .map((s) => <Picker.Item key={s.id} label={s.name} value={s['@id']} style={styles.pickerCont} />); 
+    .map((s) => <Picker.Item key={s.id} label={s.name} value={s['@id']} />); 
     const softwareJsx = softwares     
     .sort((c1, c2) => c1.name.localeCompare(c2.name))
     .map((s) => <Picker.Item key={s.id} label={s.name} value={s['@id']} />); 
@@ -37,6 +38,9 @@ export default function ShortcutsScreen(props) {
     console.log(categories);
     console.log(software);
 
+
+    //   UPLOAD IMAGE
+    
 
     return (
       <ScrollView>
@@ -105,6 +109,17 @@ export default function ShortcutsScreen(props) {
                 value={description}
                 placeholder="Description"
             />
+            {/* Ajouter une image */}
+            <View style={styles.containerImg}>
+                <Text style={styles.titreImg}>Image</Text>
+                <TouchableOpacity
+                    title='Choose file'
+                    style={styles.chooseImg}
+                >
+                    <Text  style={styles.chooseTxt}>Choose file</Text>
+                </TouchableOpacity> 
+            </View>
+
             <View style={styles.addButton}>
                 <TouchableOpacity
                     title="Ajouter"
@@ -168,6 +183,34 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderColor:'#d8d8d8',
         borderRadius:5,
+    },
+    containerImg:{
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:'white',
+        height:50,
+        marginVertical: 5,
+        borderWidth:1,
+        borderColor:'#d8d8d8',
+        borderRadius:5,
+    },
+    chooseImg:{
+        width:'50%',
+    },
+    chooseTxt:{
+        textAlign:'center', 
+    },
+    titreImg:{
+        width:'50%',
+        backgroundColor: '#114A8A',
+        color:'white',
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
+        fontWeight:'500',
+        height:'100%',
+        textAlign:'center',
+        paddingTop:15,
     },
     titreSoft:{
         width:'20%',

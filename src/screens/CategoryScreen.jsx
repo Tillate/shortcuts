@@ -1,33 +1,28 @@
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import ShortcutsDetail from "../components/ShortcutsDetail";
 
 export default function CategoryScreen(props) {
+  // Récupération du paramètre inclu dans HomeScreen
   const { categories } = props.route.params;
 
+  // On trie les name dans categories puis on créer un nouveau tableau avec map
   const categoriesJsx = categories
     .sort((c1, c2) => c1.name.localeCompare(c2.name))
     .map((s) => <Picker.Item key={s.id} label={s.name} value={s.id} />); 
 
+    // console.log(categories);
+
+  // Hook pour modifier le state local des composants
   const [category, setCategory] = useState([]);
   const [shortcut, setShortcut] = useState([]);
-  console.log(categories);
 
-  const shortcutJsx = shortcut.map((s) => (
-    <TouchableOpacity
-    onPress={() => props.navigation.navigate("Detail :", { shortcut: s })}
-    style={styles.resultContainer}
-    > 
-      <View key={s.id}>
-        <Text style={styles.resultTitle}>{s.title}</Text>
-        <Text style={styles.resultSoft}>{s.software.name}</Text>
-        <View style={styles.catContainer}>
-          {s.categories.map((c) => (
-            <Text style={styles.resultCat} key={c.id}>{c.name}</Text>
-          ))}
-        </View>
-      </View>
-    </TouchableOpacity>
+  // Affiche les differentes card lors de la selection de la categorie dans le picker
+  const shortcutJsx = shortcut.map((s, key) => (
+  <ShortcutsDetail key={s.id} shortcut={s} onPress={() => 
+    props.navigation.navigate("Detail :", { shortcut: s })}
+  />
   ));
 
   return (
@@ -49,6 +44,7 @@ export default function CategoryScreen(props) {
             {categoriesJsx}
           </Picker>
           {shortcutJsx}
+
       </View>
     </ScrollView>
   );

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import ShortcutsDetail from "../components/ShortcutsDetail";
+
 
 export default function SoftwareScreen(props) {
   const { software } = props.route.params;
@@ -12,23 +14,10 @@ export default function SoftwareScreen(props) {
   const [softwares, setSoftwares] = useState([]);
   const [shortcut, setShortcut] = useState([]);
 
+  // Affiche les differentes card lors de la selection de la categorie dans le picker
   const shortcutJsx = shortcut.map((s, key) => (
-    <TouchableOpacity
-    key={key}
-    onPress={() => props.navigation.navigate("Detail :", { shortcut: s })}
-    style={styles.resultContainer}
-    > 
-      <View key={s.id}>
-        <Text style={styles.resultTitle}>{s.title}</Text>
-        <Text style={styles.resultSoft}>{s.software.name}</Text>
-        <View style={styles.catContainer}>
-          {s.categories.map((c) => (
-            <Text style={styles.resultCat} key={c.id}>{c.name}</Text>
-          ))}
-        </View>
-      </View>
-    </TouchableOpacity>
-  ));
+  <ShortcutsDetail key={s.id} shortcut={s} onPress={() => 
+    props.navigation.navigate("Detail :", { shortcut: s })}/>));
 
   return (
     <ScrollView>
@@ -36,7 +25,7 @@ export default function SoftwareScreen(props) {
           <Picker
             selectedValue={softwares}
             onValueChange={function (itemValue, itemIndex) {
-              fetch(process.env.API_URL + "shortcuts?categories.id=" + itemValue)
+              fetch(process.env.API_URL + "shortcuts?software.id=" + itemValue)
                 .then((response) => response.json())
                 .then((data) => setShortcut(data["hydra:member"]))
                 .catch((error) => console.log(error));
@@ -71,47 +60,5 @@ const styles = StyleSheet.create({
     borderColor: "#114A8A",
     marginBottom:10,
     borderRadius:5,
-  },
-  resultContainer: {
-    backgroundColor: 'white',
-    width: '90%',
-    paddingHorizontal:10,
-    paddingVertical: 10,
-    borderWidth: 2,
-    borderColor: "#114A8A",
-    borderRadius: 10,
-    marginBottom:5,
-  },
-  catContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap:'wrap',
-  },
-  resultSoft: {
-    backgroundColor: '#186BC9',
-    color: 'white',
-    borderRadius: 5,
-    marginHorizontal: 5,
-    padding: 5,
-    fontSize: 16,
-    fontWeight:"500",
-    textAlign: 'center',
-  },
-  resultCat: {
-    backgroundColor: '#6AAFFD',
-    color: 'white',
-    borderRadius: 5,
-    padding: 10,
-    marginTop: 10,
-    marginHorizontal: 5,
-    fontSize: 16,
-    fontWeight:"500",
-    textAlign: 'center',
-  },
-  resultTitle: {
-    textAlign: 'center',
-    marginBottom: 20,
-    fontWeight: "600",
-    fontSize:18,
   },
 });
