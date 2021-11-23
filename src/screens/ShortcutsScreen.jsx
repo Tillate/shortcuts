@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet, TouchableOpacity, View, Text,  TextInput, Button } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, View, Text,  TextInput } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import * as ImagePicker from 'expo-image-picker';
+import PickerImage from "../components/ImagePicker";
 
 export default function ShortcutsScreen(props) {
     const { shortcuts } = props.route.params;
@@ -110,15 +111,10 @@ export default function ShortcutsScreen(props) {
                 placeholder="Description"
             />
             {/* Ajouter une image */}
-            <View style={styles.containerImg}>
-                <Text style={styles.titreImg}>Image</Text>
-                <TouchableOpacity
-                    title='Choose file'
-                    style={styles.chooseImg}
-                >
-                    <Text  style={styles.chooseTxt}>Choose file</Text>
-                </TouchableOpacity> 
+            <View style={styles.contimportImage}>
+                <PickerImage/>  
             </View>
+
 
             <View style={styles.addButton}>
                 <TouchableOpacity
@@ -189,11 +185,17 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
         backgroundColor:'white',
+        width:200,
         height:50,
         marginVertical: 5,
         borderWidth:1,
         borderColor:'#d8d8d8',
         borderRadius:5,
+    },
+    contimportImage:{
+        alignItems:'center',
+        justifyContent:'center',
+        height:220,
     },
     chooseImg:{
         width:'50%',
