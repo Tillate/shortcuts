@@ -19,11 +19,13 @@ export default function ShortcutsScreen(props) {
           .then((data) => setSoftwares(data["hydra:member"]))
           .catch((error) => console.log(error));
       }, []);
-
     
+  // On trie les name dans categories puis on créer un nouveau tableau avec map
     const categoriesJsx = category                 
     .sort((c1, c2) => c1.name.localeCompare(c2.name)) 
-    .map((s) => <Picker.Item key={s.id} label={s.name} value={s['@id']} />); 
+    .map((s) => <Picker.Item key={s.id} label={s.name} value={s['@id']} />);
+
+  // On trie les name dans categories puis on créer un nouveau tableau avec map
     const softwareJsx = softwares     
     .sort((c1, c2) => c1.name.localeCompare(c2.name))
     .map((s) => <Picker.Item key={s.id} label={s.name} value={s['@id']} />); 
@@ -36,12 +38,8 @@ export default function ShortcutsScreen(props) {
     const [linux, onChangeLinux] = useState("");
     const [context, onChangeContext] = useState("");
     const [description, onChangeDescription] = useState("");
-    console.log(categories);
-    console.log(software);
-
-
-    //   UPLOAD IMAGE
-    
+    // console.log(categories);
+    // console.log(software);
 
     return (
       <ScrollView>
@@ -111,7 +109,7 @@ export default function ShortcutsScreen(props) {
                 placeholder="Description"
             />
             {/* Ajouter une image */}
-            <View style={styles.contimportImage}>
+            <View style={styles.contImportImage}>
                 <PickerImage/>  
             </View>
 
@@ -120,7 +118,7 @@ export default function ShortcutsScreen(props) {
                 <TouchableOpacity
                     title="Ajouter"
                     onPress={function () {
-                    console.log("Test button");
+                    // console.log("Test button");
                     const shortcut = {
                         title: title,
                         windows: windows,
@@ -131,7 +129,7 @@ export default function ShortcutsScreen(props) {
                         software: software,
                         categories: [categories],
                     };
-                    console.log(shortcut);
+                    // console.log(shortcut);
                     fetch(process.env.API_URL + "shortcuts", {
                         method: "POST",
                         headers: {
@@ -192,7 +190,7 @@ const styles = StyleSheet.create({
         borderColor:'#d8d8d8',
         borderRadius:5,
     },
-    contimportImage:{
+    contImportImage:{
         alignItems:'center',
         justifyContent:'center',
         height:220,

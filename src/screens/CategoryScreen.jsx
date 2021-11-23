@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, ScrollView, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import ShortcutsDetail from "../components/ShortcutsDetail";
 
 export default function CategoryScreen(props) {
-  // Récupération du paramètre inclu dans HomeScreen
+  // Récupération du paramètre envoyé depuis HomeScreen
   const { categories } = props.route.params;
+  // console.log(categories);
 
   // On trie les name dans categories puis on créer un nouveau tableau avec map
   const categoriesJsx = categories
     .sort((c1, c2) => c1.name.localeCompare(c2.name))
     .map((s) => <Picker.Item key={s.id} label={s.name} value={s.id} />); 
 
-    // console.log(categories);
-
   // Hook pour modifier le state local des composants
   const [category, setCategory] = useState([]);
   const [shortcut, setShortcut] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
   // Affiche les differentes card lors de la selection de la categorie dans le picker
   const shortcutJsx = shortcut.map((s, key) => (
@@ -31,9 +32,14 @@ export default function CategoryScreen(props) {
           <Picker
             selectedValue={category}
             onValueChange={function (itemValue, itemIndex) {
+              setLoading(true)
+              setShortcut([])
               fetch(process.env.API_URL + "shortcuts?categories.id=" + itemValue)
                 .then((response) => response.json())
-                .then((data) => setShortcut(data["hydra:member"]))
+                .then((data) => {
+                  setShortcut(data["hydra:member"])
+                  setLoading(false)
+                })
                 .catch((error) => console.log(error));
               setCategory(itemValue);
             }}
@@ -44,7 +50,7 @@ export default function CategoryScreen(props) {
             {categoriesJsx}
           </Picker>
           {shortcutJsx}
-
+          {loading ? <ActivityIndicator /> : null}
       </View>
     </ScrollView>
   );

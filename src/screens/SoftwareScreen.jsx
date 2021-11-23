@@ -5,12 +5,16 @@ import ShortcutsDetail from "../components/ShortcutsDetail";
 
 
 export default function SoftwareScreen(props) {
+  // Récupération du paramètre envoyé depuis HomeScreen
   const { software } = props.route.params;
+  // console.log(software);
 
+  // On trie les name dans categories puis on créer un nouveau tableau avec map
   const softwareJsx = software
     .sort((c1, c2) => c1.name.localeCompare(c2.name))  
     .map((s) => <Picker.Item key={s.id} label={s.name} value={s.id} />); 
 
+  // Hook pour modifier le state local des composants
   const [softwares, setSoftwares] = useState([]);
   const [shortcut, setShortcut] = useState([]);
 

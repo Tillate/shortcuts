@@ -4,6 +4,8 @@ import React from "react";
 
 export default function ShortcutsDetail(props) {
   const {shortcut, onPress} = props;
+  // console.log(shortcut);
+
   return (
     <TouchableOpacity
       onPress={onPress}

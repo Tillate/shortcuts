@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet, Text, View, Image } from "react-native";
 
 export default function HomeScreen(props) {
-  // HOOK
+  // HOOK pour modifier le state local des composants
   const [categories, setCategories] = useState([]);
   const [software, setSoftwares] = useState([]);
   const [shortcuts, setShortcuts] = useState([]);
